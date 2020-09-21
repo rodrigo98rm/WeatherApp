@@ -7,14 +7,14 @@ interface RequestProps {
 export interface FetchResult {
   title: string;
   location_type: string;
-  woied: number; //Where On Earth ID
+  woeid: number; //Where On Earth ID
   latt_long: string;
   distance?: number; //metres - only on lattlong request
 }
 
 const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
 
-//TODO: Make an unique function
+//TODO: Make an unique function?
 
 export async function RequestByName(
   props: RequestProps
@@ -42,7 +42,6 @@ export async function RequestByLattAndLong(): Promise<FetchResult[] | void> {
   try {
     const localization = await getClientLocalization();
     const APILink = `http://www.metaweather.com/api/location/search/?lattlong=${localization}`;
-
     try {
       const result = await fetch(corsAnywhere + APILink);
       console.log(result);
@@ -59,4 +58,49 @@ export async function RequestByLattAndLong(): Promise<FetchResult[] | void> {
   } catch (error) {
     console.log("Localization not found:", error);
   }
+}
+
+export interface ClimateDetails {
+  title: string;
+  localization_type: string;
+  latt_log: string;
+  time: string;
+  sun: string;
+  timezone_name: string;
+  parent: object;
+  consolidated_weather: WeatherResponseFormat[];
+  sources: Array<{
+    title: string;
+    url: string;
+  }>;
+}
+
+export interface WeatherResponseFormat {
+  id: number;
+  created: string;
+  applicable_date: string;
+  weather_state_name: string;
+  weather_state_abbr: string;
+  wind_speed: number;
+  wind_direction: number;
+  wind_direction_compass: string;
+  min_temp: number;
+  max_temp: number;
+  the_temp: number;
+  air_pressure: number;
+  humidity: number;
+  visibility: number;
+  predictability: number;
+}
+
+export function climateCityDetails(woied: number): Promise<ClimateDetails> {
+  const APILink = `https://www.metaweather.com/api/location/${woied}/`;
+  return new Promise((res, rej) => {
+    fetch(corsAnywhere + APILink)
+      .then((result: Response) => {
+        const data = result.json();
+        res(data);
+      })
+      .catch((error) => rej(`Fetch failed: ${error}`));
+  });
 }

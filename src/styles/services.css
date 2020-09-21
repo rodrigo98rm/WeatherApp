@@ -1,0 +1,22 @@
+div {
+  display: flex;
+  flex-direction: column;
+}
+.forms {
+  flex-direction: row;
+}
+.forms input {
+  width: 200px;
+  height: 20px;
+}
+
+div .fetch-result {
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+
+div .fetch-result p {
+  text-align: center;
+  padding-right: 10px;
+}
