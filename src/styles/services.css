@@ -10,13 +10,18 @@ div {
   height: 20px;
 }
 
-div .fetch-result {
+div .result-details-container {
   flex-direction: row;
-  justify-content: right;
-  align-items: center;
 }
 
-div .fetch-result p {
-  text-align: center;
-  padding-right: 10px;
+div .result-details-container .fetch-result {
+  flex-direction: column;
+  align-items: right;
+}
+
+div .result-details-container .details {
+  flex-direction: column;
+  padding: 10px;
+  justify-content: right;
+  align-items: center;
 }

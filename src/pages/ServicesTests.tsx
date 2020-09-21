@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   FetchResult,
@@ -11,17 +11,20 @@ import {
 
 import "../styles/services.css";
 
+//TODO: EXCLUIR BUID E npm uninstall serve
+
 export const ServicesTestsPage: React.FC = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState<FetchResult[]>([]);
   const [weatherData, setWeatherData] = useState<WeatherResponseFormat[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   //get client's current localization
   useEffect(() => {
     async function getCurrentLocalization() {
       const response = await RequestByLattAndLong();
       if (response) {
-        setData(response);
+        handleListButton(response[0].woeid);
       }
     }
     getCurrentLocalization();
@@ -29,21 +32,26 @@ export const ServicesTestsPage: React.FC = () => {
 
   //get searched city
   function handleClick() {
-    // async function makeRequest() {
-    //   if (text) {
-    //     const response = await RequestByName({ location: text });
-    //     if (response) {
-    //       setData(response);
-    //     }
-    //   }
-    // }
-    async function getCurrentLocalization() {
-      const response = await RequestByLattAndLong();
-      if (response) {
-        setData(response);
+    async function makeRequest() {
+      if (text) {
+        setIsLoading(true);
+        const response = await RequestByName({ location: text });
+        if (response) {
+          setData(response);
+        }
+        setIsLoading(false);
       }
     }
-    getCurrentLocalization();
+    makeRequest();
+    // async function getCurrentLocalization() {
+    //   setIsLoading(true)
+    //   const response = await RequestByLattAndLong();
+    //   setIsLoading(false)
+    //   if (response) {
+    //     setData(response);
+    //   }
+    // }
+    // getCurrentLocalization();
   }
 
   async function handleListButton(woeid: number) {
@@ -60,30 +68,37 @@ export const ServicesTestsPage: React.FC = () => {
       <div className="forms">
         <input
           type="text"
+          value={text}
           onChange={(text: React.ChangeEvent<HTMLInputElement>) => {
             setText(text.target.value);
           }}
         />
         <button onClick={handleClick}>Search</button>
       </div>
-      <p>{"Search Results: "}</p>
+      {isLoading && (
+        <div>
+          <p>Loading...</p>
+        </div>
+      )}
+      <p>{"Search Results:"}</p>
       <div className="result-details-container">
-        {data.map((location: FetchResult) => (
-          <div className="fetch-result">
-            <p key={location.title + location.woeid}>{location.title}</p>
+        <div className="fetch-result">
+          {data.map((location: FetchResult) => (
             <button
               onClick={() => {
                 handleListButton(location.woeid);
               }}
             >
-              Details
+              {location.title}
             </button>
-          </div>
-        ))}
+          ))}
+        </div>
         {weatherData.map((day) => {
           return (
             <div className="details">
               <h2>{day.weather_state_name}</h2>
+              <p>Temp. Máxima: {day.max_temp.toFixed(1)}</p>
+              <p>Temp. Mínima: {day.min_temp.toFixed(1)}</p>
             </div>
           );
         })}
