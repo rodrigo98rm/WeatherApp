@@ -1,26 +1,13 @@
-import { getClientLocalization } from "../services/client-localization";
+import { getClientLocalization } from "./client-localization.request";
+import { RequestProps, FetchResult, ClimateDetails } from "./services.inteface";
 
-interface RequestProps {
-  location: string;
-}
-
-export interface FetchResult {
-  title: string;
-  location_type: string;
-  woeid: number; //Where On Earth ID
-  latt_long: string;
-  distance?: number; //metres - only on lattlong request
-}
-
-const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
+export const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
 
 //TODO: Make an unique function?
 
 export async function RequestByName(
   props: RequestProps
 ): Promise<FetchResult[] | void> {
-  console.log("entrou na funcao de pegar as informacoes pelo nome");
-
   const APILink = `http://www.metaweather.com/api/location/search/?query=${props.location}`;
   try {
     const result = await fetch(corsAnywhere + APILink);
@@ -38,7 +25,6 @@ export async function RequestByName(
 }
 
 export async function RequestByLattAndLong(): Promise<FetchResult[] | void> {
-  console.log("entrou na funcao de pegar as informacoes pelas coordendadas");
   try {
     const localization = await getClientLocalization();
     const APILink = `http://www.metaweather.com/api/location/search/?lattlong=${localization}`;
@@ -58,39 +44,6 @@ export async function RequestByLattAndLong(): Promise<FetchResult[] | void> {
   } catch (error) {
     console.log("Localization not found:", error);
   }
-}
-
-export interface ClimateDetails {
-  title: string;
-  localization_type: string;
-  latt_log: string;
-  time: string;
-  sun: string;
-  timezone_name: string;
-  parent: object;
-  consolidated_weather: WeatherResponseFormat[];
-  sources: Array<{
-    title: string;
-    url: string;
-  }>;
-}
-
-export interface WeatherResponseFormat {
-  id: number;
-  created: string;
-  applicable_date: string;
-  weather_state_name: string;
-  weather_state_abbr: string;
-  wind_speed: number;
-  wind_direction: number;
-  wind_direction_compass: string;
-  min_temp: number;
-  max_temp: number;
-  the_temp: number;
-  air_pressure: number;
-  humidity: number;
-  visibility: number;
-  predictability: number;
 }
 
 export function climateCityDetails(woied: number): Promise<ClimateDetails> {

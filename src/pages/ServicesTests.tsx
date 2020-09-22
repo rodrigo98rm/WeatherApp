@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 
 import {
   FetchResult,
+  WeatherResponseFormat,
+  ClimateDetails,
+} from "../services/services.inteface";
+
+import {
   RequestByName,
   RequestByLattAndLong,
   climateCityDetails,
-  WeatherResponseFormat,
-  ClimateDetails,
-} from "../services/api-requests";
+} from "../services/api.requests";
+
+import { getWeatherImageUrl } from "../services/image.request";
 
 import "../styles/services.css";
 
@@ -43,15 +48,6 @@ export const ServicesTestsPage: React.FC = () => {
       }
     }
     makeRequest();
-    // async function getCurrentLocalization() {
-    //   setIsLoading(true)
-    //   const response = await RequestByLattAndLong();
-    //   setIsLoading(false)
-    //   if (response) {
-    //     setData(response);
-    //   }
-    // }
-    // getCurrentLocalization();
   }
 
   async function handleListButton(woeid: number) {
@@ -94,11 +90,15 @@ export const ServicesTestsPage: React.FC = () => {
           ))}
         </div>
         {weatherData.map((day) => {
+          const url = getWeatherImageUrl(day.weather_state_abbr, {
+            format: "bigPng",
+          });
           return (
             <div className="details">
-              <h2>{day.weather_state_name}</h2>
-              <p>Temp. Máxima: {day.max_temp.toFixed(1)}</p>
-              <p>Temp. Mínima: {day.min_temp.toFixed(1)}</p>
+              <img src={url} alt="weatherLogo" />
+              <h3>{day.weather_state_name}</h3>
+              <p>Temp. Máxima: {day.max_temp.toFixed(1)} ˚C</p>
+              <p>Temp. Mínima: {day.min_temp.toFixed(1)} ˚C</p>
             </div>
           );
         })}
