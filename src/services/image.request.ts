@@ -1,18 +1,15 @@
-import { ImageType } from "./services.inteface";
+import { ImageType } from './services.inteface';
 
-export function getWeatherImageUrl(
-  weatherSteteAbbr: string,
-  imgType: ImageType
-) {
-  let url = "";
+export function getWeatherImageUrl(weatherSteteAbbr: string, imgType: ImageType) {
+  let url = '';
   switch (imgType.format) {
-    case "svg":
+    case 'svg':
       url = `https://www.metaweather.com/static/img/weather/${weatherSteteAbbr}.svg`;
       break;
-    case "ico":
+    case 'ico':
       url = `https://www.metaweather.com/static/img/weather/ico/${weatherSteteAbbr}.ico`;
       break;
-    case "smallPng":
+    case 'smallPng':
       url = `https://www.metaweather.com/static/img/weather/png/${weatherSteteAbbr}.png`;
       break;
     default:

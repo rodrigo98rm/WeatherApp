@@ -44,5 +44,5 @@ export interface WeatherResponseFormat {
 }
 
 export interface ImageType {
-  format: "svg" | "ico" | "bigPng" | "smallPng";
+  format: 'svg' | 'ico' | 'bigPng' | 'smallPng';
 }
