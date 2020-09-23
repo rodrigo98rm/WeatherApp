@@ -31,7 +31,7 @@ export async function requestByLattAndLong(): Promise<FetchResult[] | void> {
   }
 }
 
-export async function requestByDay(woied: number, day: string): Promise<ClimateDetails | void> {
+export async function requestByDay(woied: number, day: string): Promise<ClimateDetails[] | void> {
   const APILink = `https://www.metaweather.com/api/location/${woied}/${day}`;
   return new Promise((resolve, reject) => {
     makeRequest(APILink).then(resolve).catch(reject);
@@ -51,4 +51,5 @@ export function getClientLocalization(): Promise<string | void> | void {
       resolve(position.coords.latitude + ',' + position.coords.longitude);
     });
   });
-}
+} /*    how to get this reject?
+        TODO: Try to resolve this!*/

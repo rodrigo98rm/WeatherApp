@@ -16,6 +16,7 @@ export const ServicesTestsPage: React.FC = () => {
   const [weatherData, setWeatherData] = React.useState<WeatherResponseFormat[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const imgFormat = React.useRef<ImageType>({ format: 'ico' });
+  const dateTime = React.useRef('2020/9/22');
 
   //get client's current localization
   // useEffect(() => {
