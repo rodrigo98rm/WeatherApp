@@ -1,5 +1,11 @@
-export interface RequestProps {
-  location: string;
+export interface RequestFunctionsParams {
+  name?: string;
+  lattAndLong?: string;
+  woied?: number;
+  day?: {
+    woied: number;
+    date: string; //YYYY-MM-DD
+  };
 }
 
 export interface PlacesList {
@@ -41,11 +47,6 @@ export interface WeatherResponseFormat {
   humidity: number;
   visibility: number;
   predictability: number;
-}
-
-export interface RequestByDayParam {
-  woied: number;
-  date: string;
 }
 
 export interface ImageType {

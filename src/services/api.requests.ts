@@ -1,4 +1,4 @@
-import { RequestProps, FetchResult, ClimateDetails, RequestByDayParam } from './services.inteface';
+import { RequestFunctionsParams, PlacesList, ClimateDetails } from './services.inteface';
 
 export const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 
@@ -12,14 +12,14 @@ function makeRequest(link: string): Promise<any> {
   });
 }
 
-export function requestByName(props: RequestProps): Promise<FetchResult[] | void> {
-  const APILink = `http://www.metaweather.com/api/location/search/?query=${props.location}`;
+export function requestByName(props: RequestFunctionsParams): Promise<PlacesList[]> {
+  const APILink = `http://www.metaweather.com/api/location/search/?query=${props.name}`;
   return new Promise((resolve, reject) => {
     makeRequest(APILink).then(resolve).catch(reject);
   });
 }
 
-export async function requestByLattAndLong(): Promise<FetchResult[] | void> {
+export async function requestByLattAndLong(): Promise<PlacesList[]> {
   try {
     const localization = await getClientLocalization();
     const APILink = `http://www.metaweather.com/api/location/search/?lattlong=${localization}`;
@@ -28,24 +28,25 @@ export async function requestByLattAndLong(): Promise<FetchResult[] | void> {
     });
   } catch (error) {
     console.log('Localization not found:', error);
+    return [];
   }
 }
 
-export async function requestByDay(param: RequestByDayParam): Promise<ClimateDetails[] | void> {
-  const APILink = `https://www.metaweather.com/api/location/${param.woied}/${param.date}`;
+export async function requestByDay(param: RequestFunctionsParams): Promise<ClimateDetails[]> {
+  const APILink = `https://www.metaweather.com/api/location/${param.day?.woied}/${param.day?.date}`;
   return new Promise((resolve, reject) => {
     makeRequest(APILink).then(resolve).catch(reject);
   });
 }
 
-export async function climateCityDetails(woied: number): Promise<ClimateDetails | void> {
+export async function climateCityDetails(woied: number): Promise<ClimateDetails> {
   const APILink = `https://www.metaweather.com/api/location/${woied}`;
   return new Promise((resolve, reject) => {
     makeRequest(APILink).then(resolve).catch(reject);
   });
 }
 
-export function getClientLocalization(): Promise<string | void> | void {
+export function getClientLocalization(): Promise<string> | void {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((position) => {
       resolve(position.coords.latitude + ',' + position.coords.longitude);

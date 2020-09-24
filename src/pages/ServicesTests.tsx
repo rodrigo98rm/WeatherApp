@@ -16,26 +16,13 @@ export const ServicesTestsPage: React.FC = () => {
   const imgFormat = React.useRef<ImageType>({ format: 'ico' });
   const dateTime = React.useRef('2020/9/22');
 
-  //get client's current localization
-  React.useEffect(() => {
-    async function getCurrentLocalization() {
-      setIsLoading(true);
-      const response = await requestByLattAndLong();
-      if (response) {
-        handleListButton(response[0].woeid);
-      }
-      setIsLoading(false);
-    }
-    getCurrentLocalization();
-  }, []);
-
-  //get searched city
-
   async function handleListButton(woeid: number) {
+    setIsLoading(true);
     const result = await climateCityDetails(woeid);
     if (result) {
       setWeatherData(result.consolidated_weather);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -53,8 +40,8 @@ export const ServicesTestsPage: React.FC = () => {
         <Search
           handleClick={(data: any) => setData(data)}
           title='Search'
-          funcRequest={requestByName}
-          param={{ name: text }}
+          requestListOfCities={requestByLattAndLong}
+          param={{ lattAndLong: text }}
         />
       </div>
       {isLoading && (
@@ -65,16 +52,19 @@ export const ServicesTestsPage: React.FC = () => {
       <p>{'Search Results:'}</p>
       <div className='result-details-container'>
         <div className='fetch-result'>
-          {data.map((location: PlacesList) => (
-            <button
-              key={location.woeid}
-              onClick={() => {
-                handleListButton(location.woeid);
-              }}
-            >
-              {location.title}
-            </button>
-          ))}
+          {data.map((location: PlacesList) => {
+            console.log(location);
+            return (
+              <button
+                key={location.woeid}
+                onClick={() => {
+                  handleListButton(location.woeid);
+                }}
+              >
+                {location.title}
+              </button>
+            );
+          })}
         </div>
         {weatherData.map((day) => {
           const url = getWeatherImageUrl(day.weather_state_abbr, imgFormat.current);

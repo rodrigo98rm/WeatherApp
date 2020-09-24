@@ -1,28 +1,25 @@
 // import { StyledButton } from './search-button.component.styled';
 import * as React from 'react';
-import { ClimateDetails, PlacesList } from '../../services/services.inteface';
+import { RequestFunctionsParams, ClimateDetails, PlacesList } from '../../services/services.inteface';
 
-export interface ButtonProps {
+export interface SearchButtonProps {
   title: string;
-  param: RequestFunctionParams;
-  funcRequest: (param: RequestFunctionParams) => Promise<PlacesList[] | ClimateDetails[]>;
+  param: RequestFunctionsParams;
+  requestListOfCities?: (param: RequestFunctionsParams) => Promise<PlacesList[]>;
+  requestWeather?: (param: RequestFunctionsParams) => Promise<ClimateDetails[]>;
   handleClick: (value: PlacesList[] | ClimateDetails[]) => void;
 }
 
-interface RequestFunctionParams {
-  name?: string;
-  lattAndLong?: string;
-  woeid?: number;
-  day?: {
-    woied: number;
-    date: string; //YYYY-MM-DD
-  };
-}
-
-export const Search: React.FC<ButtonProps> = (props) => {
+export const Search: React.FC<SearchButtonProps> = (props) => {
   const handelRequest = async () => {
-    const result = await props.funcRequest(props.param);
-    props.handleClick(result ? result : []);
+    if (props.requestListOfCities) {
+      const result = await props.requestListOfCities(props.param);
+      props.handleClick(result ? result : []);
+    }
+    if (props.requestWeather) {
+      const result = await props.requestWeather(props.param);
+      props.handleClick(result ? result : []);
+    }
   };
 
   return (
