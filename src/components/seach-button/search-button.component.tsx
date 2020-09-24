@@ -11,7 +11,7 @@ export interface SearchButtonProps {
 }
 
 export const Search: React.FC<SearchButtonProps> = (props) => {
-  const handelRequest = async () => {
+  const handleRequest = async () => {
     if (props.requestListOfCities) {
       const result = await props.requestListOfCities(props.param);
       props.handleClick(result ? result : []);
@@ -24,7 +24,7 @@ export const Search: React.FC<SearchButtonProps> = (props) => {
 
   return (
     <div>
-      <button onClick={handelRequest}>{props.title}</button>
+      <button onClick={handleRequest}>{props.title}</button>
     </div>
   );
 };
