@@ -1,4 +1,4 @@
-import { RequestProps, FetchResult, ClimateDetails } from './services.inteface';
+import { RequestProps, FetchResult, ClimateDetails, RequestByDayParam } from './services.inteface';
 
 export const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 
@@ -31,8 +31,8 @@ export async function requestByLattAndLong(): Promise<FetchResult[] | void> {
   }
 }
 
-export async function requestByDay(woied: number, day: string): Promise<ClimateDetails[] | void> {
-  const APILink = `https://www.metaweather.com/api/location/${woied}/${day}`;
+export async function requestByDay(param: RequestByDayParam): Promise<ClimateDetails[] | void> {
+  const APILink = `https://www.metaweather.com/api/location/${param.woied}/${param.date}`;
   return new Promise((resolve, reject) => {
     makeRequest(APILink).then(resolve).catch(reject);
   });

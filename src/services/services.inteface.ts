@@ -2,7 +2,7 @@ export interface RequestProps {
   location: string;
 }
 
-export interface FetchResult {
+export interface PlacesList {
   title: string;
   location_type: string;
   woeid: number; //Where On Earth ID
@@ -41,6 +41,11 @@ export interface WeatherResponseFormat {
   humidity: number;
   visibility: number;
   predictability: number;
+}
+
+export interface RequestByDayParam {
+  woied: number;
+  date: string;
 }
 
 export interface ImageType {
