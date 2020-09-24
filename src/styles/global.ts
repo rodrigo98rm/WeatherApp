@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 
 	* {
 		margin: 0;
@@ -16,7 +16,7 @@ export default createGlobalStyle`
 	}
 
 	body, input, button {
-		font-family: 'Roboto Slab', serif;
+		font-family: 'Roboto Slab', "Ubuntu", serif;
 		font-size: 16px;
 	}
 
@@ -29,3 +29,5 @@ export default createGlobalStyle`
 	}
 
 `;
+
+export default GlobalStyle;
