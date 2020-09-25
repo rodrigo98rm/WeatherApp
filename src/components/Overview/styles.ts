@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface TempButtonProps {
+	selected?: boolean;
+}
+
 export const Container = styled.div`
 	flex: 1;
 	display: flex;
@@ -8,7 +12,35 @@ export const Container = styled.div`
 	align-items: center;
 	min-height: 100vh;
 	background: #100e1d;
-	padding: 32px;
+	padding: 16px;
+	position: relative;
+`;
+
+export const ContentContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 86px;
+`;
+
+export const TempSelectorContainer = styled.div`
+	display: flex;
+	margin-top: 16px;
+
+	@media only screen and (min-width: 768px) {
+		align-self: flex-end;
+	}
+`;
+
+export const TempButton = styled.button<TempButtonProps>`
+	background: ${(props) => (props.selected ? '#E7E7EB' : '#585676')};
+	color: ${(props) => (props.selected ? '#110E3C' : '#E7E7EB')};
+	width: 40px;
+	height: 40px;
+	font-weight: bold;
+	border: none;
+	border-radius: 20px;
+	margin-left: 12px;
 `;
 
 export const WeekContainer = styled.div`
@@ -18,6 +50,7 @@ export const WeekContainer = styled.div`
 	grid-row-gap: 32px;
 	grid-template-columns: auto auto;
 	justify-content: center;
+	margin-top: 36px;
 
 	@media only screen and (min-width: 768px) {
 		display: flex;
@@ -91,21 +124,25 @@ export const HighlightContainer = styled.div`
 
 	h3 {
 		font-size: 16px;
+		color: #e7e7eb;
 	}
 
 	p .number {
 		font-size: 64px;
 		font-weight: bold;
+		color: #e7e7eb;
 	}
 
 	p .unit {
 		font-size: 32px;
+		color: #e7e7eb;
 	}
 `;
 
 export const Names = styled.p`
-	bottom: 26;
+	position: absolute;
+	bottom: 0;
 	text-align: center;
-	margin-top: 56px;
+	margin: 32px;
 	color: #616475;
 `;

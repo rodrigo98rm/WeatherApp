@@ -1,7 +1,12 @@
 import React from 'react';
 
+import PercentBar from '../PercentBar';
+
 import {
 	Container,
+	ContentContainer,
+	TempSelectorContainer,
+	TempButton,
 	WeekContainer,
 	DayCard,
 	CardTitle,
@@ -56,51 +61,63 @@ const days = [
 const Overview: React.FC = () => {
 	return (
 		<Container>
-			<WeekContainer>
-				{days.map((day) => (
-					<DayCard key={day.title}>
-						<CardTitle>{day.title}</CardTitle>
-						<WeatherImage src={day.image} />
-						<TemperaturesContainer>
-							<MaxTemp>{day.max}</MaxTemp>
-							<MinTemp>{day.min}</MinTemp>
-						</TemperaturesContainer>
-					</DayCard>
-				))}
-			</WeekContainer>
-			<TodaysHighlightsContainer>
-				<h2>Today's Highlights</h2>
-				<HighlightsGrid>
-					<HighlightContainer>
-						<h3>Wind status</h3>
-						<p>
-							<span className="number">7</span>
-							<span className="unit">mph</span>
-						</p>
-					</HighlightContainer>
-					<HighlightContainer>
-						<h3>Humidity</h3>
-						<p>
-							<span className="number">84</span>
-							<span className="unit">%</span>
-						</p>
-					</HighlightContainer>
-					<HighlightContainer>
-						<h3>Visibility</h3>
-						<p>
-							<span className="number">6,4</span>
-							<span className="unit">miles</span>
-						</p>
-					</HighlightContainer>
-					<HighlightContainer>
-						<h3>Air Pressure</h3>
-						<p>
-							<span className="number">998</span>
-							<span className="unit">mb</span>
-						</p>
-					</HighlightContainer>
-				</HighlightsGrid>
-			</TodaysHighlightsContainer>
+			<ContentContainer>
+				<TempSelectorContainer>
+					<TempButton type="button" selected>
+						°C
+					</TempButton>
+					<TempButton type="button">°F</TempButton>
+				</TempSelectorContainer>
+				<WeekContainer>
+					{days.map((day) => (
+						<DayCard key={day.title}>
+							<CardTitle>{day.title}</CardTitle>
+							<WeatherImage src={day.image} />
+							<TemperaturesContainer>
+								<MaxTemp>{day.max}</MaxTemp>
+								<MinTemp>{day.min}</MinTemp>
+							</TemperaturesContainer>
+						</DayCard>
+					))}
+				</WeekContainer>
+				<TodaysHighlightsContainer>
+					<h2>Today's Highlights</h2>
+					<HighlightsGrid>
+						<HighlightContainer>
+							<h3>Wind status</h3>
+							<p>
+								<span className="number">7</span>
+								<span className="unit">mph</span>
+							</p>
+						</HighlightContainer>
+						<HighlightContainer>
+							<h3>Humidity</h3>
+							<p>
+								<span className="number">84</span>
+								<span className="unit">%</span>
+							</p>
+							<PercentBar
+								style={{ width: '70%', marginTop: 28 }}
+								progress={84}
+							/>
+						</HighlightContainer>
+						<HighlightContainer>
+							<h3>Visibility</h3>
+							<p>
+								<span className="number">6,4</span>
+								<span className="unit">miles</span>
+							</p>
+						</HighlightContainer>
+						<HighlightContainer>
+							<h3>Air Pressure</h3>
+							<p>
+								<span className="number">998</span>
+								<span className="unit">mb</span>
+							</p>
+						</HighlightContainer>
+					</HighlightsGrid>
+				</TodaysHighlightsContainer>
+			</ContentContainer>
 			<Names>
 				Gabriel Fiali, Lucas Gobatto, Rodrigo Mayer @ DevChallenges.io
 			</Names>
