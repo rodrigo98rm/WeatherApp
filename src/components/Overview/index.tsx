@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PercentBar from '../PercentBar';
+import WindDirection from '../WindDirection';
 
 import {
 	Container,
@@ -89,6 +90,7 @@ const Overview: React.FC = () => {
 								<span className="number">7</span>
 								<span className="unit">mph</span>
 							</p>
+							<WindDirection deg={314} compass="NW" />
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Humidity</h3>
