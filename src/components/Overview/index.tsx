@@ -10,7 +10,9 @@ import {
 	MaxTemp,
 	MinTemp,
 	TodaysHighlightsContainer,
-	HighlightsTitle,
+	HighlightsGrid,
+	HighlightContainer,
+	Names,
 } from './styles';
 
 const days = [
@@ -56,7 +58,7 @@ const Overview: React.FC = () => {
 		<Container>
 			<WeekContainer>
 				{days.map((day) => (
-					<DayCard>
+					<DayCard key={day.title}>
 						<CardTitle>{day.title}</CardTitle>
 						<WeatherImage src={day.image} />
 						<TemperaturesContainer>
@@ -67,8 +69,41 @@ const Overview: React.FC = () => {
 				))}
 			</WeekContainer>
 			<TodaysHighlightsContainer>
-				<HighlightsTitle>Today's Highlights</HighlightsTitle>
+				<h2>Today's Highlights</h2>
+				<HighlightsGrid>
+					<HighlightContainer>
+						<h3>Wind status</h3>
+						<p>
+							<span className="number">7</span>
+							<span className="unit">mph</span>
+						</p>
+					</HighlightContainer>
+					<HighlightContainer>
+						<h3>Humidity</h3>
+						<p>
+							<span className="number">84</span>
+							<span className="unit">%</span>
+						</p>
+					</HighlightContainer>
+					<HighlightContainer>
+						<h3>Visibility</h3>
+						<p>
+							<span className="number">6,4</span>
+							<span className="unit">miles</span>
+						</p>
+					</HighlightContainer>
+					<HighlightContainer>
+						<h3>Air Pressure</h3>
+						<p>
+							<span className="number">998</span>
+							<span className="unit">mb</span>
+						</p>
+					</HighlightContainer>
+				</HighlightsGrid>
 			</TodaysHighlightsContainer>
+			<Names>
+				Gabriel Fiali, Lucas Gobatto, Rodrigo Mayer @ DevChallenges.io
+			</Names>
 		</Container>
 	);
 };

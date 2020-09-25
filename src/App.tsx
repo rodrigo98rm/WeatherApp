@@ -13,7 +13,7 @@ const App: React.FC = () => {
 				Divs below are just to fill the left part of the screen
 				TODO: Replace by Fiali's component on merge
 			*/}
-			<div style={{ display: 'flex', height: '100vh' }}>
+			<div style={{ display: 'flex' }}>
 				<div
 					className="fialisContainer"
 					style={{ width: '459px', background: '#1E213A' }}
