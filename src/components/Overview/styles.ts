@@ -134,6 +134,7 @@ export const HighlightContainer = styled.div`
 	}
 
 	p .unit {
+		margin-left: 8px;
 		font-size: 32px;
 		color: #e7e7eb;
 	}
