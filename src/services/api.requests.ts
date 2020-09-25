@@ -6,26 +6,22 @@ function makeRequest(link: string): Promise<any> {
   return new Promise((resolve, reject) => {
     fetch(corsAnywhere + link)
       .then((result: Response) => {
-        result.ok ? resolve(result.json()) : console.log('makeRequst says:', result.statusText);
+        result.ok ? resolve(result.json()) : console.log('makeRequest says:', result.statusText);
       })
       .catch(reject);
   });
 }
 
-export function requestByName(props: RequestFunctionsParams): Promise<PlacesList[]> {
+export async function requestByName(props: RequestFunctionsParams): Promise<PlacesList[]> {
   const APILink = `http://www.metaweather.com/api/location/search/?query=${props.name}`;
-  return new Promise((resolve, reject) => {
-    makeRequest(APILink).then(resolve).catch(reject);
-  });
+  return await makeRequest(APILink);
 }
 
 export async function requestByLattAndLong(): Promise<PlacesList[]> {
   try {
     const localization = await getClientLocalization();
     const APILink = `http://www.metaweather.com/api/location/search/?lattlong=${localization}`;
-    return new Promise((resolve, reject) => {
-      makeRequest(APILink).then(resolve).catch(reject);
-    });
+    return await makeRequest(APILink);
   } catch (error) {
     alert(`Localization not found: ${error}`);
     return [];
@@ -34,16 +30,12 @@ export async function requestByLattAndLong(): Promise<PlacesList[]> {
 
 export async function requestByDay(param: RequestFunctionsParams): Promise<ClimateDetails[]> {
   const APILink = `https://www.metaweather.com/api/location/${param.day?.woied}/${param.day?.date}`;
-  return new Promise((resolve, reject) => {
-    makeRequest(APILink).then(resolve).catch(reject);
-  });
+  return await makeRequest(APILink);
 }
 
 export async function climateCityDetails(woied: number): Promise<ClimateDetails> {
   const APILink = `https://www.metaweather.com/api/location/${woied}`;
-  return new Promise((resolve, reject) => {
-    makeRequest(APILink).then(resolve).catch(reject);
-  });
+  return await makeRequest(APILink);
 }
 
 export function getClientLocalization(): Promise<string> | void {
@@ -55,5 +47,4 @@ export function getClientLocalization(): Promise<string> | void {
       (error) => reject(error.message),
     );
   });
-} /*    how to get this reject?
-        TODO: Try to resolve this!*/
+}
