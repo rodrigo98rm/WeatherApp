@@ -6,7 +6,7 @@ function makeRequest(link: string): Promise<any> {
   return new Promise((resolve, reject) => {
     fetch(corsAnywhere + link)
       .then((result: Response) => {
-        result.ok ? resolve(result.json()) : alert(result.statusText);
+        result.ok ? resolve(result.json()) : console.log('makeRequst says:', result.statusText);
       })
       .catch(reject);
   });
@@ -27,7 +27,7 @@ export async function requestByLattAndLong(): Promise<PlacesList[]> {
       makeRequest(APILink).then(resolve).catch(reject);
     });
   } catch (error) {
-    console.log('Localization not found:', error);
+    alert(`Localization not found: ${error}`);
     return [];
   }
 }
@@ -48,9 +48,12 @@ export async function climateCityDetails(woied: number): Promise<ClimateDetails>
 
 export function getClientLocalization(): Promise<string> | void {
   return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      resolve(position.coords.latitude + ',' + position.coords.longitude);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve(position.coords.latitude + ',' + position.coords.longitude);
+      },
+      (error) => reject(error.message),
+    );
   });
 } /*    how to get this reject?
         TODO: Try to resolve this!*/

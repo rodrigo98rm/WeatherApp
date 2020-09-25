@@ -7,6 +7,7 @@ import { getWeatherImageUrl } from '../services/image.request';
 import '../styles/services.css';
 
 import { Search } from '../components/seach-button';
+import { GpsButton } from '../components/gps-button';
 
 export const ServicesTestsPage: React.FC = () => {
   const [text, setText] = React.useState('');
@@ -28,57 +29,7 @@ export const ServicesTestsPage: React.FC = () => {
   return (
     <div>
       <h1>Services Tests Page</h1>
-      <p>Search by City Name</p>
-      <div className='forms'>
-        <input
-          type='text'
-          value={text}
-          onChange={(text: React.ChangeEvent<HTMLInputElement>) => {
-            setText(text.target.value);
-          }}
-        />
-        <Search
-          handleClick={(data: any) => setData(data)}
-          title='Search'
-          requestListOfCities={requestByLattAndLong}
-          param={{ lattAndLong: text }}
-        />
-      </div>
-      {isLoading && (
-        <div>
-          <p>Loading...</p>
-        </div>
-      )}
-      <p>{'Search Results:'}</p>
-      <div className='result-details-container'>
-        <div className='fetch-result'>
-          {data.map((location: PlacesList) => {
-            console.log(location);
-            return (
-              <button
-                key={location.woeid}
-                onClick={() => {
-                  handleListButton(location.woeid);
-                }}
-              >
-                {location.title}
-              </button>
-            );
-          })}
-        </div>
-        {weatherData.map((day) => {
-          const url = getWeatherImageUrl(day.weather_state_abbr, imgFormat.current);
-          return (
-            <div className='details'>
-              <h3>{day.applicable_date}</h3>
-              <img src={url} alt='weatherLogo' />
-              <h4>{day.weather_state_name}</h4>
-              <p>Temp. Máxima: {day.max_temp.toFixed(1)} ˚C</p>
-              <p>Temp. Mínima: {day.min_temp.toFixed(1)} ˚C</p>
-            </div>
-          );
-        })}
-      </div>
+      <GpsButton handleClick={(data: WeatherResponseFormat[]) => setWeatherData(data)} />
     </div>
   );
 };
