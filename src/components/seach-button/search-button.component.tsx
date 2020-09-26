@@ -1,6 +1,6 @@
 // import { StyledButton } from './search-button.component.styled';
 import * as React from 'react';
-import { RequestFunctionsParams, ClimateDetails, PlacesList } from '../../services/services.inteface';
+import { RequestFunctionsParams, ClimateDetails, PlacesList } from '../../services/services.interface';
 
 export interface SearchButtonProps {
   title: string;

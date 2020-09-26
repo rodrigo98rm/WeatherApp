@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { climateCityDetails, requestByLattAndLong } from '../../services/api.requests';
-import { WeatherResponseFormat } from '../../services/services.inteface';
+import { WeatherResponseFormat } from '../../services/services.interface';
 
 interface GpsButtonProps {
   handleClick: (value: WeatherResponseFormat[]) => void;

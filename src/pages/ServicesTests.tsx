@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { PlacesList, WeatherResponseFormat, ClimateDetails, ImageType } from '../services/services.inteface';
+import { PlacesList, WeatherResponseFormat, ClimateDetails, ImageType } from '../services/services.interface';
 import { requestByName, requestByLattAndLong, climateCityDetails } from '../services/api.requests';
 import { getWeatherImageUrl } from '../services/image.request';
 

@@ -1,4 +1,4 @@
-import { RequestFunctionsParams, PlacesList, ClimateDetails } from './services.inteface';
+import { RequestFunctionsParams, PlacesList, ClimateDetails } from './services.interface';
 
 export const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 
