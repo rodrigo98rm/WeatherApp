@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import GlobalStyle from './styles/global';
 import './styles/app.css';
@@ -10,7 +10,7 @@ const App: React.FC = () => {
 		<div>
 			<GlobalStyle />
 			<div style={{ display: 'flex' }}>
-        <Sidebar />
+				<Sidebar />
 				<Overview />
 			</div>
 		</div>

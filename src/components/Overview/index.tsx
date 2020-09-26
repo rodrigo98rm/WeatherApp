@@ -37,21 +37,21 @@ const days = [
 		min: '11°C',
 	},
 	{
-		title: 'Sat, 7 Jun',
+		title: 'Sat, 8 Jun',
 		image:
 			'https://s3-alpha-sig.figma.com/img/e308/a80c/552bf4cb3e0f6975f35550f86c1cfff4?Expires=1601856000&Signature=XztzhvQzDwIdT-iaVmlHbcZKCaO-8PJtEL6VVWFfNtQVLFVVngEzG95UWZtbC6B5kFljbTOiKsFnJSex9ukEuopadj7qn~AB7i7qpOnft6v70iihMb1LEz-AbLCtrM3YYA4Bwa~U1zQ2gfEK488AsrBmFFVSnUkaWIYsVaAn8qBAYbpuWIzhe7bUXQDeIpEjVEreIPHX2~3XC9dFireeRJ-lYjhnhWxjcvM-0PuoAmlOjpz0EqjYms4MF6PbnR2cfgp4ZSjwzj4nq1I8gPbEHWoKCalR6PysXOVll4GeyOjm24bOpmgbTHNIMeU2VP-cZ~EB6NC4LJNp0XiTV1IbyQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
 		max: '16°C',
 		min: '11°C',
 	},
 	{
-		title: 'Sat, 7 Jun',
+		title: 'Sat, 9 Jun',
 		image:
 			'https://s3-alpha-sig.figma.com/img/45eb/70c2/0e1bc8eaa58f08247fba3e24c97f27a7?Expires=1601856000&Signature=d6TVdVaKIheDE9mvCm~C2iZmB0p35maDLdMHW2yVy1tv4h0oYS8s3ASQ~yYTzLnvBZqI~uft2vjsAuKYMtjZNwn0AbrjjwkUyCCMG8iM6KV9iQhGN6SL1X-hb9TmEB7acug5nShvoDMFQdFnPlD0~ZZSrbGAQBLYT~Js~AiMKZRyLiEDucX~m7KBcs0zU5YTsus917qNyQdoQCRcMBHeVFpz06WLRmmrtIOKdHf-b-U1FZAFbOQSIlqAjKiOghcGh9A64sjpXHATsuNkA~VMH8lPL2bF-ahtl~SR2nqT8iDLgrQ4AU3GGhdB7~Fdfz2BHJUykyODfRMnbTicIKAn-w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
 		max: '16°C',
 		min: '11°C',
 	},
 	{
-		title: 'Sat, 7 Jun',
+		title: 'Sat, 10 Jun',
 		image:
 			'https://s3-alpha-sig.figma.com/img/fb7e/5223/a57b752577aeb78d53ecb0543cd572df?Expires=1601856000&Signature=I-j65vFjafT5HGukIUP1r94VUdl5yyH8dw21-HwQVi6Y8eSTWEb7Nw1eDRS8slDtj7CV5vCAQEkY7MmpI27tgFKK~EGXsERXvC3rHRR7CJiKI4CnoLXda41KDBdzjPI9VXJHArhf1ZpsJ6a6X2JhVvuOdzClaFrsxFZesA9OWV7F-8its5M-EOpVJtrrQe26prwhhRFF8Pg1TqkFmkJQSVUhdfYf5Ew7C042cgMPB1y~htAXSxKjAnELKcbRAAZyeC8iG9aua9XS56FxdAGc343Oe9WoXKsqN1u9KpyuyTaq0EmDnwnkHlNWIA4DIH02i6~Lw6HB~bx-3Qimidu4Kw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
 		max: '16°C',
@@ -64,10 +64,10 @@ const Overview: React.FC = () => {
 		<Container>
 			<ContentContainer>
 				<TempSelectorContainer>
-					<TempButton type="button" selected>
+					<TempButton type='button' selected>
 						°C
 					</TempButton>
-					<TempButton type="button">°F</TempButton>
+					<TempButton type='button'>°F</TempButton>
 				</TempSelectorContainer>
 				<WeekContainer>
 					{days.map((day) => (
@@ -87,42 +87,37 @@ const Overview: React.FC = () => {
 						<HighlightContainer>
 							<h3>Wind status</h3>
 							<p>
-								<span className="number">7</span>
-								<span className="unit">mph</span>
+								<span className='number'>7</span>
+								<span className='unit'>mph</span>
 							</p>
-							<WindDirection deg={314} compass="NW" />
+							<WindDirection deg={314} compass='NW' />
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Humidity</h3>
 							<p>
-								<span className="number">84</span>
-								<span className="unit">%</span>
+								<span className='number'>84</span>
+								<span className='unit'>%</span>
 							</p>
-							<PercentBar
-								style={{ width: '70%', marginTop: 28 }}
-								progress={84}
-							/>
+							<PercentBar style={{ width: '70%', marginTop: 28 }} progress={84} />
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Visibility</h3>
 							<p>
-								<span className="number">6,4</span>
-								<span className="unit">miles</span>
+								<span className='number'>6,4</span>
+								<span className='unit'>miles</span>
 							</p>
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Air Pressure</h3>
 							<p>
-								<span className="number">998</span>
-								<span className="unit">mb</span>
+								<span className='number'>998</span>
+								<span className='unit'>mb</span>
 							</p>
 						</HighlightContainer>
 					</HighlightsGrid>
 				</TodaysHighlightsContainer>
 			</ContentContainer>
-			<Names>
-				Gabriel Fiali, Lucas Gobatto, Rodrigo Mayer @ DevChallenges.io
-			</Names>
+			<Names>Gabriel Fiali, Lucas Gobatto, Rodrigo Mayer @ DevChallenges.io</Names>
 		</Container>
 	);
 };
