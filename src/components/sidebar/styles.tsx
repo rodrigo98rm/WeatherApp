@@ -43,6 +43,12 @@ export const InfoContainer = styled.div`
 
 export const StatusImage = styled.img`
     width: 80%;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 `;
 
 export const TempContainer = styled.div`
