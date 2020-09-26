@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 
+	html {
+		height: 100vh;
+	}
+
 	* {
 		margin: 0;
 		padding: 0;
@@ -16,7 +20,7 @@ export default createGlobalStyle`
 	}
 
 	body, input, button {
-		font-family: 'Roboto Slab', serif;
+		font-family: 'Raleway', serif;
 		font-size: 16px;
 	}
 
