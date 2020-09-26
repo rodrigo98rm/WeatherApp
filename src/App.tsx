@@ -1,33 +1,13 @@
-import React from 'react';
+import React from "react";
 
-interface Weather {
-  info: {
-    tempMax: number;
-    tempMin: number;
-    type: 'Cloudy' | 'Clear';
-    isEndOfWorld?: boolean;
-  };
-}
+import Routes from "./routes/routes";
 
-const Weather: React.FC<Weather> = ({ info }) => {
+function App() {
   return (
     <div>
-      <p>{info.type}</p>
+      <Routes />
     </div>
   );
-};
-
-const App: React.FC = () => {
-  return (
-    <Weather
-      info={{
-        tempMax: 39.4,
-        tempMin: 32.6,
-        type: 'Cloudy',
-        isEndOfWorld: true,
-      }}
-    />
-  );
-};
+}
 
 export default App;
