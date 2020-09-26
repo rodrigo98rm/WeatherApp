@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './components/sidebar/Sidebar';
+import Sidebar from './components/Sidebar/Sidebar';
 import GlobalStyle from './styles/global';
 import './styles/app.css';
 
