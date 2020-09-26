@@ -1,13 +1,20 @@
-import React from 'react';
-
+import React from "react";
 import Sidebar from './components/sidebar/Sidebar';
+import GlobalStyle from './styles/global';
+import './styles/app.css';
+
+import Overview from './components/Overview';
 
 const App: React.FC = () => {
-  return (
-    <div className="container">
-      <Sidebar></Sidebar>
-    </div>
-  );
+	return (
+		<div>
+			<GlobalStyle />
+			<div style={{ display: 'flex' }}>
+        <Sidebar />
+				<Overview />
+			</div>
+		</div>
+	);
 };
 
 export default App;
