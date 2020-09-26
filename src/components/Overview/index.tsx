@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useWeather } from '../../hooks/weather';
+import formatDate from '../../utils/functions/formatDate';
+
+import { getWeatherImageUrl } from '../../services/image.request';
 
 import PercentBar from '../PercentBar';
 import WindDirection from '../WindDirection';
@@ -60,6 +64,12 @@ const days = [
 ];
 
 const Overview: React.FC = () => {
+	const { climate } = useWeather();
+
+	const today = useMemo(() => {
+		return climate?.consolidated_weather[0];
+	}, [climate]);
+
 	return (
 		<Container>
 			<ContentContainer>
@@ -70,13 +80,13 @@ const Overview: React.FC = () => {
 					<TempButton type='button'>°F</TempButton>
 				</TempSelectorContainer>
 				<WeekContainer>
-					{days.map((day) => (
-						<DayCard key={day.title}>
-							<CardTitle>{day.title}</CardTitle>
-							<WeatherImage src={day.image} />
+					{climate?.consolidated_weather.map((day) => (
+						<DayCard key={day.id}>
+							<CardTitle>{formatDate(day.applicable_date)}</CardTitle>
+							<WeatherImage src={getWeatherImageUrl(day.weather_state_abbr, { format: 'smallPng' })} />
 							<TemperaturesContainer>
-								<MaxTemp>{day.max}</MaxTemp>
-								<MinTemp>{day.min}</MinTemp>
+								<MaxTemp>{day.max_temp.toFixed(0)} ⁰C</MaxTemp>
+								<MinTemp>{day.min_temp.toFixed(0)} ⁰C</MinTemp>
 							</TemperaturesContainer>
 						</DayCard>
 					))}
@@ -87,30 +97,30 @@ const Overview: React.FC = () => {
 						<HighlightContainer>
 							<h3>Wind status</h3>
 							<p>
-								<span className='number'>7</span>
+								<span className='number'>{today?.wind_speed.toFixed(0)}</span>
 								<span className='unit'>mph</span>
 							</p>
-							<WindDirection deg={314} compass='NW' />
+							<WindDirection deg={today?.wind_direction} compass={today?.wind_direction_compass} />
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Humidity</h3>
 							<p>
-								<span className='number'>84</span>
+								<span className='number'>{today?.humidity}</span>
 								<span className='unit'>%</span>
 							</p>
-							<PercentBar style={{ width: '70%', marginTop: 28 }} progress={84} />
+							<PercentBar style={{ width: '70%', marginTop: 28 }} progress={today?.humidity} />
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Visibility</h3>
 							<p>
-								<span className='number'>6,4</span>
+								<span className='number'>{today?.visibility.toFixed(0)}</span>
 								<span className='unit'>miles</span>
 							</p>
 						</HighlightContainer>
 						<HighlightContainer>
 							<h3>Air Pressure</h3>
 							<p>
-								<span className='number'>998</span>
+								<span className='number'>{today?.air_pressure}</span>
 								<span className='unit'>mb</span>
 							</p>
 						</HighlightContainer>

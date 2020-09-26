@@ -1,31 +1,26 @@
-import React from "react";
+import React from 'react';
+import { useWeather } from '../hooks/weather';
+import { requestByLattAndLong } from '../services/api.requests';
 
-interface Weather {
-  info: {
-    tempMax: number;
-    tempMin: number;
-    type: "Cloudy" | "Clear";
-    isEndOfWorld?: boolean;
-  };
-}
+const Home: React.FC = ({ children }) => {
+	const { climate, getClimate } = useWeather();
 
-const Weather: React.FC<Weather> = ({ info }) => {
-  return (
-    <div>
-      <p>{info.type}</p>
-    </div>
-  );
+	React.useEffect(() => {
+		const exec = async (): Promise<void> => {
+			const nearstCities = await requestByLattAndLong();
+			if (nearstCities.length > 0) {
+				getClimate(nearstCities[0].woeid);
+			}
+		};
+
+		exec();
+	}, []);
+
+	if (!climate) {
+		return <div>Carregando...</div>;
+	}
+
+	return <div style={{ display: 'flex' }}>{children}</div>;
 };
 
-export const HomePage: React.FC = () => {
-  return (
-    <Weather
-      info={{
-        tempMax: 39.4,
-        tempMin: 32.6,
-        type: "Cloudy",
-        isEndOfWorld: true,
-      }}
-    />
-  );
-};
+export default Home;
