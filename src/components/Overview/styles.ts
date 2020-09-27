@@ -58,7 +58,7 @@ export const WeekContainer = styled.div`
 `;
 
 export const DayCard = styled.div`
-	width: 120px;
+	width: 140px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
