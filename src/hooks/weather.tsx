@@ -14,7 +14,15 @@ const WeatherContext = createContext<WeatherContextData>({} as WeatherContextDat
 
 export const WeatherProvider: React.FC = ({ children }) => {
 	const [climate, setClimate] = useState<ClimateDetails | null>(null);
-	const [tempUnit, setTempUnit] = useState<WeatherContextData['tempUnit']>('celcius');
+	const [tempUnit, setTempUnit] = useState<WeatherContextData['tempUnit']>(() => {
+		const savedUnit = localStorage.getItem('@WeatherApp:tempUnit') as WeatherContextData['tempUnit'];
+
+		if (savedUnit) {
+			return savedUnit;
+		}
+
+		return 'celcius';
+	});
 
 	const addFahrenheitTemps = useCallback((data: ClimateDetails): ClimateDetails => {
 		const tempData = { ...data };
@@ -34,6 +42,8 @@ export const WeatherProvider: React.FC = ({ children }) => {
 
 	const changeTempUnit = useCallback((unit: WeatherContextData['tempUnit']) => {
 		// TODO: Save selected temp unit to localStorage
+
+		localStorage.setItem('@WeatherApp:tempUnit', unit);
 
 		setTempUnit(unit);
 	}, []);
