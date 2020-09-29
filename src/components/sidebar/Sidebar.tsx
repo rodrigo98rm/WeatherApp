@@ -2,10 +2,9 @@ import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import * as Styles from './styles';
 import { GpsButton } from '../gps-button';
-import { getWeatherImageUrl } from '../../services/image.request';
 import formatDate from '../../utils/functions/formatDate';
 import { useWeather } from '../../hooks/weather';
-import { requestByLattAndLong } from '../../services/api.requests';
+import { getIcon } from '../../utils/functions/weatherIcon';
 
 const Sidebar: React.FC = () => {
 	const { climate, getClimate } = useWeather();
@@ -19,10 +18,7 @@ const Sidebar: React.FC = () => {
 			{climate && (
 				<Styles.InfoContainer>
 					{climate?.consolidated_weather[0].weather_state_abbr && (
-						<Styles.StatusImage
-							src={getWeatherImageUrl(climate?.consolidated_weather[0].weather_state_abbr, { format: 'svg' })}
-							alt='Cloudy'
-						/>
+						<Styles.StatusImage src={getIcon(climate?.consolidated_weather[0].weather_state_abbr) || ''} />
 					)}
 					<Styles.TempContainer>
 						{climate?.consolidated_weather[0].max_temp.toFixed(0)} <b>⁰C</b>
