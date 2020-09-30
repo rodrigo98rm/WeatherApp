@@ -1,4 +1,5 @@
 import React from 'react';
+import { Loading } from '../components/Loading';
 import { useWeather } from '../hooks/weather';
 import { requestByLattAndLong } from '../services/api.requests';
 
@@ -16,9 +17,13 @@ const Home: React.FC = ({ children }) => {
 		exec();
 	}, []);
 
-	// if (!climate) {
-	// 	return <div>Carregando...</div>;
-	// }
+	if (!climate) {
+		return (
+			<div style={{ display: 'flex' }}>
+				<Loading />
+			</div>
+		);
+	}
 
 	return <div style={{ display: 'flex' }}>{children}</div>;
 };
