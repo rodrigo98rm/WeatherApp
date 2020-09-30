@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import * as Styles from './styles';
-import { GpsButton } from '../gps-button';
+import { GpsButton } from '../GpsButton';
 import formatDate from '../../utils/functions/formatDate';
 import { useWeather } from '../../hooks/weather';
 import { getIcon } from '../../utils/functions/weatherIcon';
