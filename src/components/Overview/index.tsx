@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react';
-import { useWeather } from '../../hooks/weather';
+import React, { useMemo } from 'react';
+import { useWeather } from '../../hooks/WeatherHook/weather';
+import { useLoading } from '../../hooks/LoadingHook/loading';
 import formatDate from '../../utils/functions/formatDate';
 
 import PercentBar from '../PercentBar';
@@ -24,12 +25,19 @@ import {
 } from './styles';
 
 import { getIcon } from '../../utils/functions/weatherIcon';
+import { OverviewOnLoad } from '../Loading';
+
 const Overview: React.FC = () => {
 	const { climate, tempUnit, changeTempUnit } = useWeather();
+	const { isLoading } = useLoading();
 
 	const today = useMemo(() => {
 		return climate?.consolidated_weather[0];
 	}, [climate]);
+
+	if (isLoading) {
+		return <OverviewOnLoad />;
+	}
 
 	return (
 		<Container>
@@ -60,7 +68,7 @@ const Overview: React.FC = () => {
 					{climate?.consolidated_weather.map((day) => (
 						<DayCard key={day.id}>
 							<CardTitle>{formatDate(day.applicable_date)}</CardTitle>
-              <WeatherImage src={getIcon(day.weather_state_abbr) || ''} />
+							<WeatherImage src={getIcon(day.weather_state_abbr) || ''} />
 							{tempUnit === 'celcius' && (
 								<TemperaturesContainer>
 									<MaxTemp>{day.max_temp.toFixed(0)} ⁰C</MaxTemp>

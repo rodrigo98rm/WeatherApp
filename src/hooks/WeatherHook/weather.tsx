@@ -1,7 +1,9 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
-import { climateCityDetails } from '../services/api.requests';
-import { ClimateDetails } from '../services/services.interface';
-import toFahrenheit from '../utils/functions/toFahrenheit';
+
+import toFahrenheit from '../../utils/functions/toFahrenheit';
+
+import { climateCityDetails } from '../../services/api.requests';
+import { ClimateDetails } from '../../services/services.interface';
 
 interface WeatherContextData {
 	climate: ClimateDetails | null;

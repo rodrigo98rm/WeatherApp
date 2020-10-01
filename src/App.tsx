@@ -5,18 +5,21 @@ import './styles/app.css';
 
 import Home from './pages/Home';
 
-import AppProvider from './hooks';
+import { ClimateProvider } from './hooks/WeatherHook';
+import { LoadProvider } from './hooks/LoadingHook';
 import Overview from './components/Overview';
 
 const App: React.FC = () => {
 	return (
-		<AppProvider>
-			<GlobalStyle />
-			<Home>
-				<Sidebar />
-				<Overview />
-			</Home>
-		</AppProvider>
+		<LoadProvider>
+			<ClimateProvider>
+				<GlobalStyle />
+				<Home>
+					<Sidebar />
+					<Overview />
+				</Home>
+			</ClimateProvider>
+		</LoadProvider>
 	);
 };
 
