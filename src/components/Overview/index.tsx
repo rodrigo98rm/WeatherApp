@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { useWeather } from '../../hooks/weather';
+import { useWeather } from '../../hooks/WeatherHook/weather';
+import { useLoading } from '../../hooks/LoadingHook/loading';
 import formatDate from '../../utils/functions/formatDate';
 
 import PercentBar from '../PercentBar';
@@ -24,13 +25,19 @@ import {
 } from './styles';
 
 import { getIcon } from '../../utils/functions/weatherIcon';
+import { OverviewOnLoad } from '../Loading';
 
 const Overview: React.FC = () => {
 	const { climate } = useWeather();
+	const { isLoading } = useLoading();
 
 	const today = useMemo(() => {
 		return climate?.consolidated_weather[0];
 	}, [climate]);
+
+	if (isLoading) {
+		return <OverviewOnLoad />;
+	}
 
 	return (
 		<Container>
