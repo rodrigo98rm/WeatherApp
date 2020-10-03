@@ -6,6 +6,7 @@ import './styles/app.css';
 import Home from './pages/Home';
 
 import AppProvider from './hooks';
+
 import Overview from './components/Overview';
 
 const App: React.FC = () => {
