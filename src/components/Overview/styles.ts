@@ -73,6 +73,8 @@ export const CardTitle = styled.span`
 export const WeatherImage = styled.img`
 	margin-top: 10px;
 	width: 56px;
+	height: 56px;
+	object-fit: contain;
 `;
 
 export const TemperaturesContainer = styled.div`

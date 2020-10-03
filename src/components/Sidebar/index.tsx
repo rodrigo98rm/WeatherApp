@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
 					</Styles.DateContainer>
 					<Styles.DateContainer style={{ justifyContent: 'center', alignItems: 'center' }}>
 						<FaMapMarkerAlt style={{ marginRight: 8 }} />
-						<h3>{climate?.title}</h3>
+						<h2>{climate?.title}</h2>
 					</Styles.DateContainer>
 				</Styles.InfoContainer>
 			)}
