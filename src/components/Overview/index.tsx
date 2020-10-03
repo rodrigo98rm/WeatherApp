@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useWeather } from '../../hooks/weather';
 import formatDate from '../../utils/functions/formatDate';
 
@@ -24,9 +24,8 @@ import {
 } from './styles';
 
 import { getIcon } from '../../utils/functions/weatherIcon';
-
 const Overview: React.FC = () => {
-	const { climate } = useWeather();
+	const { climate, tempUnit, changeTempUnit } = useWeather();
 
 	const today = useMemo(() => {
 		return climate?.consolidated_weather[0];
@@ -36,20 +35,44 @@ const Overview: React.FC = () => {
 		<Container>
 			<ContentContainer>
 				<TempSelectorContainer>
-					<TempButton type='button' selected>
+					<TempButton
+						type='button'
+						selected={tempUnit === 'celcius'}
+						disabled={tempUnit === 'celcius'}
+						onClick={() => {
+							changeTempUnit('celcius');
+						}}
+					>
 						°C
 					</TempButton>
-					<TempButton type='button'>°F</TempButton>
+					<TempButton
+						type='button'
+						selected={tempUnit === 'fahrenheit'}
+						disabled={tempUnit === 'fahrenheit'}
+						onClick={() => {
+							changeTempUnit('fahrenheit');
+						}}
+					>
+						°F
+					</TempButton>
 				</TempSelectorContainer>
 				<WeekContainer>
 					{climate?.consolidated_weather.map((day) => (
 						<DayCard key={day.id}>
 							<CardTitle>{formatDate(day.applicable_date)}</CardTitle>
-							<WeatherImage src={getIcon(day.weather_state_abbr) || ''} />
-							<TemperaturesContainer>
-								<MaxTemp>{day.max_temp.toFixed(0)} ⁰C</MaxTemp>
-								<MinTemp>{day.min_temp.toFixed(0)} ⁰C</MinTemp>
-							</TemperaturesContainer>
+              <WeatherImage src={getIcon(day.weather_state_abbr) || ''} />
+							{tempUnit === 'celcius' && (
+								<TemperaturesContainer>
+									<MaxTemp>{day.max_temp.toFixed(0)} ⁰C</MaxTemp>
+									<MinTemp>{day.min_temp.toFixed(0)} ⁰C</MinTemp>
+								</TemperaturesContainer>
+							)}
+							{tempUnit === 'fahrenheit' && (
+								<TemperaturesContainer>
+									<MaxTemp>{day.max_temp_fahrenheit?.toFixed(0)} ⁰F</MaxTemp>
+									<MinTemp>{day.min_temp_fahrenheit?.toFixed(0)} ⁰F</MinTemp>
+								</TemperaturesContainer>
+							)}
 						</DayCard>
 					))}
 				</WeekContainer>
