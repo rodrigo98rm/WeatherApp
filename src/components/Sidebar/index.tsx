@@ -5,7 +5,7 @@ import { GpsButton } from '../gps-button';
 import { getWeatherImageUrl } from '../../services/image.request';
 import formatDate from '../../utils/functions/formatDate';
 import { useWeather } from '../../hooks/weather';
-import { requestByLattAndLong } from '../../services/api.requests';
+// import { requestByLattAndLong } from '../../services/api.requests';
 
 const Sidebar: React.FC = () => {
 	const { climate, getClimate } = useWeather();
@@ -38,7 +38,7 @@ const Sidebar: React.FC = () => {
 					</Styles.DateContainer>
 					<Styles.DateContainer style={{ justifyContent: 'center', alignItems: 'center' }}>
 						<FaMapMarkerAlt style={{ marginRight: 8 }} />
-						<h3>{climate?.title}</h3>
+						<h2>{climate?.title}</h2>
 					</Styles.DateContainer>
 				</Styles.InfoContainer>
 			)}
