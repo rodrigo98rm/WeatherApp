@@ -10,7 +10,7 @@ import Sleet from './Sleet.png';
 import Snow from './Snow.png';
 import Thunderstorm from './Thunderstorm.png';
 
-export const Icons = {
+export default {
 	Clear,
 	CloudBackground,
 	Hail,
