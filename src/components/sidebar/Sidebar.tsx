@@ -2,13 +2,12 @@ import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import * as Styles from './styles';
 import { GpsButton } from '../gps-button';
-import { getWeatherImageUrl } from '../../services/image.request';
 import formatDate from '../../utils/functions/formatDate';
 import { useWeather } from '../../hooks/weather';
-import { requestByLattAndLong } from '../../services/api.requests';
+import { getIcon } from '../../utils/functions/weatherIcon';
 
 const Sidebar: React.FC = () => {
-	const { climate, getClimate } = useWeather();
+	const { climate, tempUnit, getClimate } = useWeather();
 
 	return (
 		<Styles.Sidebar>
@@ -19,14 +18,18 @@ const Sidebar: React.FC = () => {
 			{climate && (
 				<Styles.InfoContainer>
 					{climate?.consolidated_weather[0].weather_state_abbr && (
-						<Styles.StatusImage
-							src={getWeatherImageUrl(climate?.consolidated_weather[0].weather_state_abbr, { format: 'svg' })}
-							alt='Cloudy'
-						/>
+						<Styles.StatusImage src={getIcon(climate?.consolidated_weather[0].weather_state_abbr) || ''} />
 					)}
-					<Styles.TempContainer>
-						{climate?.consolidated_weather[0].max_temp.toFixed(0)} <b>⁰C</b>
-					</Styles.TempContainer>
+					{tempUnit === 'celcius' && (
+						<Styles.TempContainer>
+							{climate?.consolidated_weather[0].the_temp.toFixed(0)} <b>⁰C</b>
+						</Styles.TempContainer>
+					)}
+					{tempUnit === 'fahrenheit' && (
+						<Styles.TempContainer>
+							{climate?.consolidated_weather[0].the_temp_fahrenheit?.toFixed(0)} <b>⁰F</b>
+						</Styles.TempContainer>
+					)}
 					<h1>{climate?.consolidated_weather[0].weather_state_name}</h1>
 					<Styles.DateContainer>
 						<h2>Today</h2>
