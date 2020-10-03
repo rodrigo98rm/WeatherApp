@@ -45,8 +45,8 @@ export const InitalHomePage: React.FC = () => {
 				<Magnify size='300px' />
 				<VSeparator />
 				<Label>
-					Nothing to show... Search the place or allow us your location to see details about the weather for the next 5
-					days.
+					Nothing to show... Search for a place or allow us access to your location to see details about the weather for
+					the next 5 days.
 				</Label>
 			</InitialSidebar>
 			{isLoading ? <OverviewOnLoad /> : <OverviewNotOnLoad />}
