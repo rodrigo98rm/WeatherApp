@@ -16,9 +16,9 @@ const Home: React.FC = ({ children }) => {
 		exec();
 	}, []);
 
-	if (!climate) {
-		return <div>Carregando...</div>;
-	}
+	// if (!climate) {
+	// 	return <div>Carregando...</div>;
+	// }
 
 	return <div style={{ display: 'flex' }}>{children}</div>;
 };

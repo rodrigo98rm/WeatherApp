@@ -2,8 +2,6 @@ import React, { useMemo, useState } from 'react';
 import { useWeather } from '../../hooks/weather';
 import formatDate from '../../utils/functions/formatDate';
 
-import { getWeatherImageUrl } from '../../services/image.request';
-
 import PercentBar from '../PercentBar';
 import WindDirection from '../WindDirection';
 
@@ -15,7 +13,6 @@ import {
 	WeekContainer,
 	DayCard,
 	CardTitle,
-	WeatherImage,
 	TemperaturesContainer,
 	MaxTemp,
 	MinTemp,
@@ -23,8 +20,10 @@ import {
 	HighlightsGrid,
 	HighlightContainer,
 	Names,
+	WeatherImage,
 } from './styles';
 
+import { getIcon } from '../../utils/functions/weatherIcon';
 const Overview: React.FC = () => {
 	const { climate, tempUnit, changeTempUnit } = useWeather();
 
@@ -61,7 +60,7 @@ const Overview: React.FC = () => {
 					{climate?.consolidated_weather.map((day) => (
 						<DayCard key={day.id}>
 							<CardTitle>{formatDate(day.applicable_date)}</CardTitle>
-							<WeatherImage src={getWeatherImageUrl(day.weather_state_abbr, { format: 'smallPng' })} />
+              <WeatherImage src={getIcon(day.weather_state_abbr) || ''} />
 							{tempUnit === 'celcius' && (
 								<TemperaturesContainer>
 									<MaxTemp>{day.max_temp.toFixed(0)} ⁰C</MaxTemp>
