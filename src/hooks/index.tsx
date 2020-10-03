@@ -1,7 +1,14 @@
 import React from 'react';
 
-import { WeatherProvider } from './weather';
+import { WeatherProvider } from './WeatherHook';
+import { LoadingProvider } from './LoadingHook';
 
-const AppProvider: React.FC = ({ children }) => <WeatherProvider>{children}</WeatherProvider>;
+const AppProvider: React.FC = ({ children }) => {
+	return (
+		<LoadingProvider>
+			<WeatherProvider>{children}</WeatherProvider>
+		</LoadingProvider>
+	);
+};
 
 export default AppProvider;
