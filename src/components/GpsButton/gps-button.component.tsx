@@ -2,7 +2,7 @@ import React from 'react';
 import { requestByLattAndLong } from '../../services/api.requests';
 import { GpsButtonStyled } from './gps-button.component.styled';
 import { GpsIcon } from '../../assets/icons/GpsIcon';
-import { useLoading } from '../../hooks/LoadingHook/loading';
+import { useLoading } from '../../hooks/LoadingHook';
 
 interface GpsButtonProps {
 	onTap(woeid: number): void;

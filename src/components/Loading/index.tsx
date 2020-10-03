@@ -2,8 +2,8 @@ import React from 'react';
 import { InitialSidebar, Label, Magnify, VSeparator, Container, Map } from './styled';
 import { ButtonContainer, Button } from '../Sidebar/styles';
 import { GpsButton } from '../GpsButton';
-import { useWeather } from '../../hooks/WeatherHook/weather';
-import { useLoading } from '../../hooks/LoadingHook/loading';
+import { useWeather } from '../../hooks/WeatherHook';
+import { useLoading } from '../../hooks/LoadingHook';
 import { Names } from '../Overview/styles';
 
 export const OverviewOnLoad: React.FC = () => {

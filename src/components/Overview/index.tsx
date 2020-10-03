@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { useWeather } from '../../hooks/WeatherHook/weather';
-import { useLoading } from '../../hooks/LoadingHook/loading';
+import { useWeather } from '../../hooks/WeatherHook';
+import { useLoading } from '../../hooks/LoadingHook';
 import formatDate from '../../utils/functions/formatDate';
 
 import PercentBar from '../PercentBar';
