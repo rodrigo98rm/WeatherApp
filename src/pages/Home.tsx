@@ -1,31 +1,36 @@
-import React from "react";
+import React from 'react';
+import { InitalHomePage } from '../components/Loading';
+import { useWeather } from '../hooks/WeatherHook';
+import { useLoading } from '../hooks/LoadingHook';
+import { requestByLattAndLong } from '../services/api.requests';
 
-interface Weather {
-  info: {
-    tempMax: number;
-    tempMin: number;
-    type: "Cloudy" | "Clear";
-    isEndOfWorld?: boolean;
-  };
-}
+const Home: React.FC = ({ children }) => {
+	const { climate, getClimate } = useWeather();
+	const { setLoading } = useLoading();
 
-const Weather: React.FC<Weather> = ({ info }) => {
-  return (
-    <div>
-      <p>{info.type}</p>
-    </div>
-  );
+	React.useEffect(() => {
+		const exec = async (): Promise<void> => {
+			setLoading(true);
+			const nearstCities = await requestByLattAndLong();
+			if (nearstCities.length > 0) {
+				getClimate(nearstCities[0].woeid);
+			}
+			setLoading(false);
+		};
+
+		exec();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	if (!climate) {
+		return (
+			<div style={{ display: 'flex' }}>
+				<InitalHomePage />
+			</div>
+		);
+	}
+
+	return <div style={{ display: 'flex' }}>{children}</div>;
 };
 
-export const HomePage: React.FC = () => {
-  return (
-    <Weather
-      info={{
-        tempMax: 39.4,
-        tempMin: 32.6,
-        type: "Cloudy",
-        isEndOfWorld: true,
-      }}
-    />
-  );
-};
+export default Home;

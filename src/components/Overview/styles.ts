@@ -58,7 +58,7 @@ export const WeekContainer = styled.div`
 `;
 
 export const DayCard = styled.div`
-	width: 120px;
+	width: 140px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -73,6 +73,8 @@ export const CardTitle = styled.span`
 export const WeatherImage = styled.img`
 	margin-top: 10px;
 	width: 56px;
+	height: 56px;
+	object-fit: contain;
 `;
 
 export const TemperaturesContainer = styled.div`
